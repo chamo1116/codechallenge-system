@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  etl:
+    build: .
+    volumes:
+      - .:/opt/etl
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    volumes:
+      - postgres123-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+
+volumes:
+  postgres123-data: {}
